@@ -19,7 +19,7 @@ import lombok.Setter;
  * @author gustavolessa
  *
  */
-@Entity @Builder
+@Entity @Builder @NoArgsConstructor @AllArgsConstructor
 public class UrlEntry extends PanacheEntity{
 	
 	@Column(name = "url", nullable = false)
