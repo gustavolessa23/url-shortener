@@ -22,7 +22,7 @@ import com.gustavolessa.urlshortener.services.ShorteningService;
 
 /**
  * Class to control url shortener endpoints.
- * @author gustavolessa
+ * @author Gustavo Lessa
  *
  */
 @Path("/")
@@ -39,7 +39,11 @@ public class UrlShorteningController {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response addUrl(@FormParam("url") String url) {
 		String converted = shortener.addUrl(url);
-		return Response.ok(converted).status(201).build();
+		if(converted != null) {
+			return Response.ok(converted).status(201).build();
+		} else {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
 	}
 
 	@GET

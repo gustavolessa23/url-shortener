@@ -15,13 +15,17 @@ public class ShorteningService {
 	
 	
 	public String addUrl(String url) {
-		UrlEntry urlEntry = new UrlEntry(url);
-		urlEntry.persist();
-		long id = urlEntry.id;
-		String converted = converter.convertIdToCode(id);
-		urlEntry.shorten = converted;
-		
-		return converted;
+		if(ValidatorService.isValid(url)) {
+			UrlEntry urlEntry = new UrlEntry(url);
+			urlEntry.persist();
+			long id = urlEntry.id;
+			String converted = converter.convertIdToCode(id);
+			urlEntry.shorten = converted;
+			
+			return converted;
+		} else {
+			return null;
+		}
 	}
 	
 	public String getUrl(String code) {

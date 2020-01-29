@@ -12,9 +12,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
-@Entity @Builder @AllArgsConstructor @NoArgsConstructor
+/**
+ * URL Entry entity. According to Quarkus developers, setting the variables as public will automatically 
+ * change all direct calls to accessor and mutators, and the variable will be converted to private.
+ * (https://quarkus.io/guides/hibernate-orm-panache).
+ * @author gustavolessa
+ *
+ */
+@Entity @Builder
 public class UrlEntry extends PanacheEntity{
 	
 	@Column(name = "url", nullable = false)
@@ -30,23 +35,4 @@ public class UrlEntry extends PanacheEntity{
     	this.url = url;
 	}
 
-//	public static UrlEntry findById(long id){
-//        return find("id", id).firstResult();
-//    }
-
-
 }
-
-//
-//@Id @Getter
-//@GeneratedValue(strategy = GenerationType.SEQUENCE)
-//@Column(name = "id", updatable = false, nullable = false)
-//private Long id;
-//
-//@Getter @Setter
-//@Column(name = "url", nullable = false)
-//private String url;
-//
-//public static UrlEntry findById(long id){
-//    return find("id", id).firstResult();
-//}
