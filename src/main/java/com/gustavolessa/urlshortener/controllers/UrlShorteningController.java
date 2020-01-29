@@ -1,8 +1,9 @@
-package com.gustavolessa;
+package com.gustavolessa.urlshortener.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -15,63 +16,45 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.gustavolessa.urlshortener.entities.UrlEntry;
+import com.gustavolessa.urlshortener.services.ConverterService;
+import com.gustavolessa.urlshortener.services.ShorteningService;
+
+/**
+ * Class to control url shortener endpoints.
+ * @author gustavolessa
+ *
+ */
 @Path("/")
 //@Consumes(MediaType.APPLICATION_JSON)
-public class UrlEntryResource {
+public class UrlShorteningController {
 	
+	@Inject
+	ShorteningService shortener;
 
-	private final String characterMap = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	private final int charBase = characterMap.length();
-
-
-	public long convertToNumber(String str){
-		long num = 0;
-		for(int i = 0 ; i< str.length(); i++)
-			num += characterMap.indexOf(str.charAt(i)) * Math.pow(charBase , (str.length() - (i + 1)));
-
-		return num;
-	}
-
-	
-	public String convertURL(long num) {
-		StringBuilder sb = new StringBuilder();
-
-		while (num > 0){
-			sb.append(characterMap.charAt((int)(num % charBase)));
-			num /= charBase;
-		}
-
-		return sb.reverse().toString();
-	}
 	
 	@POST
 	@Transactional
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response addUrl(@FormParam("url") String url) {
-		UrlEntry urlEntry = new UrlEntry(url);
-		urlEntry.persist();
-		long id = urlEntry.id;
-		String converted = convertURL(id);
+		String converted = shortener.addUrl(url);
 		return Response.ok(converted).status(201).build();
-		
 	}
 
 	@GET
 	@Path("/{link}")
 	public Response getUrl(@PathParam("link") String link) {
-		long id = convertToNumber(link);
-		UrlEntry entry = UrlEntry.findById(id);
-		String url = entry.url;
+		String url = shortener.getUrl(link);
 		URI uri;
 		try {
 			uri = new URI(url);
 			return Response.status(Status.TEMPORARY_REDIRECT).location(uri).build();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
+			return Response.status(Status.NOT_FOUND).build();
 		}
 
-		return null;
 	}
 
 

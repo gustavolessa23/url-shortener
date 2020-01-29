@@ -1,4 +1,4 @@
-package com.gustavolessa;
+package com.gustavolessa.urlshortener.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +20,9 @@ public class UrlEntry extends PanacheEntity{
 	@Column(name = "url", nullable = false)
 	public String url;
 	
+	@Column(name = "shorten")
+	public String shorten;
+	
 	public UrlEntry() {
 		
 	}
@@ -27,9 +30,9 @@ public class UrlEntry extends PanacheEntity{
     	this.url = url;
 	}
 
-	public static UrlEntry findById(long id){
-        return find("id", id).firstResult();
-    }
+//	public static UrlEntry findById(long id){
+//        return find("id", id).firstResult();
+//    }
 
 
 }
