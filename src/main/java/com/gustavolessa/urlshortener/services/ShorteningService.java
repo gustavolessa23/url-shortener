@@ -3,7 +3,7 @@ package com.gustavolessa.urlshortener.services;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
+import javax.transaction.Transactional;
 
 import com.gustavolessa.urlshortener.entities.UrlEntry;
 
@@ -28,6 +28,7 @@ public class ShorteningService {
 	 * @param url
 	 * @return converted URL code.
 	 */
+	@Transactional
 	public String addUrl(String url) {
 		if(ValidatorService.isValid(url)) { // check if URL is valid
 			UrlEntry urlEntry = new UrlEntry(url);
@@ -47,6 +48,7 @@ public class ShorteningService {
 	 * @param code
 	 * @return
 	 */
+	@Transactional
 	public String getUrl(String code) {
 		long id = converter.convertCodeToId(code); // get original Id.
 		UrlEntry entry = UrlEntry.findById(id); // get from DB original entry

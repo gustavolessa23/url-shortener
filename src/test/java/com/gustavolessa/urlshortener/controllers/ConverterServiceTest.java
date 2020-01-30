@@ -22,7 +22,7 @@ public class ConverterServiceTest {
 	@Test
 	public void convertingIdToCode() {
 		assertEquals("a", converter.convertIdToCode(1));
-		assertEquals("c", converter.convertIdToCode(2));
+		assertEquals("b", converter.convertIdToCode(2));
 	}
 	
 	@Test

@@ -1,6 +1,7 @@
 package com.gustavolessa.urlshortener.services;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
 
 import com.gustavolessa.urlshortener.entities.LogEntry;
 
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
  * @author Gustavo Lessa
  *
  */
-@ApplicationScoped @NoArgsConstructor @AllArgsConstructor
+@ApplicationScoped
 public class StatsService {
 
 	/**
@@ -22,9 +23,10 @@ public class StatsService {
 	 * @param type
 	 * @return
 	 */
+	@Transactional
 	public String log(String urlId, String type) {
 		LogEntry entry = new LogEntry(urlId, type);
-		entry.persistAndFlush();
+		entry.persist();
 		return "Log saved.";
 	}
 	
