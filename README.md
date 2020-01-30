@@ -1,8 +1,16 @@
-# url-shortener project
+# URL shortener API
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project uses Quarkus, the Supersonic Subatomic Java Framework, PostgreSQL DB and Lombok.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+
+
+## Endpoints
+
+`/api/v1`  POST request with `url` as body param to shorten a new URL.
+
+`/api/v1/{code}` GET request with `code` as request param to redirect to original URL from shortened code. 
+
 
 ## Running the application in dev mode
 
