@@ -2,11 +2,7 @@ package com.gustavolessa.urlshortener.controllers;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -34,13 +30,15 @@ public class UrlShorteningController {
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response addUrl(@FormParam("url") String url) {
-		String converted = shortener.addUrl(url);
-		if(converted != null) {
+		try{
+			String converted = shortener.addUrl(url);
 			String message = "Success! The URL can be accessed by /"+converted;
 			return Response.ok(message).status(Status.CREATED).build();
-		} else {
-			return Response.status(Status.BAD_REQUEST).build();
+		}catch (BadRequestException b){
+			return Response.ok(b.getMessage()).status(Status.BAD_REQUEST).build();
+
 		}
+
 	}
 
 

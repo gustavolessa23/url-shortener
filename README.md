@@ -1,6 +1,6 @@
-# URL shortener API
+# URL Shortener API
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework, PostgreSQL DB and Lombok.
+This project uses Quarkus, PostgreSQL DB and Lombok.
 
 When using Panache ORM, if an entity extends `PanacheEntity`, when writing its fields as public, Quarkus will automatically convert them to private and create accessors and mutator. All direct calls are transformed into getters/setters' calls also. It also sets the ID automatically.
 
@@ -28,6 +28,13 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 --data-urlencode 'url=https://github.com/gustavolessa23/url-shortener'
 
 
+## Deployment to Heroku
+This project was deployed to Heroku and is accessible using the following URL:
+```
+http://gurusl.herokuapp.com/api/v1
+```
+
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
@@ -42,6 +49,7 @@ It produces the executable `url-shortener-1.0.0-SNAPSHOT-runner.jar` file in `/t
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
 
 The application is now runnable using `java -jar target/url-shortener-1.0.0-SNAPSHOT-runner.jar`.
+
 
 ## Creating a native executable
 
