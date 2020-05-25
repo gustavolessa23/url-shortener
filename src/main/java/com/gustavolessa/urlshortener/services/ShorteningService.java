@@ -4,8 +4,12 @@ package com.gustavolessa.urlshortener.services;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
 
 import com.gustavolessa.urlshortener.entities.UrlEntry;
+
+import java.util.Optional;
 
 /**
  * Shortening service class, responsible for shortening URLs from original URLs and retrieving original URLs
@@ -28,20 +32,25 @@ public class ShorteningService {
 	 * @param url
 	 * @return converted URL code.
 	 */
-	@Transactional
-	public String addUrl(String url) {
+	public String addUrl(String url) throws BadRequestException{
 		if(ValidatorService.isValid(url)) { // check if URL is valid
-			UrlEntry urlEntry = new UrlEntry(url);
-			urlEntry.persistAndFlush(); // persist and send to database straight away.
-			long id = urlEntry.id; // get ID.
-			String converted = converter.convertIdToCode(id); // get shortened code.
-			urlEntry.shorten = converted; // add to DB.
-			stats.log(String.valueOf(id), "created"); // log creation to DB.
-			return converted;
+			try{
+				return UrlEntry.findByUrlOptional(url);
+			}catch (NotFoundException e){
+				UrlEntry urlEntry = new UrlEntry(url);
+				urlEntry.persistAndFlush(); // persist and send to database straight away.
+				long id = urlEntry.id; // get ID.
+				String converted = converter.convertIdToCode(id); // get shortened code.
+				urlEntry.shorten = converted; // add to DB.
+				stats.log(String.valueOf(id), "created"); // log creation to DB.
+				return converted;
+			}
 		} else {
-			return null;
+			throw new BadRequestException("URL is invalid.");
 		}
 	}
+
+
 	
 	/**
 	 * Retrieve original URL from shortened code.
@@ -58,6 +67,22 @@ public class ShorteningService {
 		} else {
 			return null;
 		}
+	}
+
+	public String getUrl2(String code) throws NotFoundException {
+		try{
+			return UrlEntry.findByCodeOptional(code);
+		}catch (NotFoundException e){
+			throw new NotFoundException();
+		}
+//			UrlEntry urlEntry = new UrlEntry(url);
+//			urlEntry.persistAndFlush(); // persist and send to database straight away.
+//			long id = urlEntry.id; // get ID.
+//			String converted = converter.convertIdToCode(id); // get shortened code.
+//			urlEntry.shorten = converted; // add to DB.
+//			stats.log(String.valueOf(id), "created"); // log creation to DB.
+//			return converted;
+//		}
 	}
 	
 	
