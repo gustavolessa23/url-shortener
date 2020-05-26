@@ -1,152 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>url-shortener - 1.0.0-SNAPSHOT</title>
-    <style>
-        h1, h2, h3, h4, h5, h6 {
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-            line-height: 1.5;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-        }
-
-        h2 {
-            font-size: 2rem
-        }
-
-        h3 {
-            font-size: 1.75rem
-        }
-
-        h4 {
-            font-size: 1.5rem
-        }
-
-        h5 {
-            font-size: 1.25rem
-        }
-
-        h6 {
-            font-size: 1rem
-        }
-
-        .lead {
-            font-weight: 300;
-            font-size: 2rem;
-        }
-
-        .banner {
-            font-size: 2.7rem;
-            margin: 0;
-            padding: 2rem 1rem;
-            background-color: #00A1E2;
-            color: white;
-        }
-
-        body {
-            margin: 0;
-            font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        }
-
-        code {
-            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 87.5%;
-            color: #e83e8c;
-            word-break: break-word;
-        }
-
-        .left-column {
-            padding: .75rem;
-            max-width: 75%;
-            min-width: 55%;
-        }
-
-        .right-column {
-            padding: .75rem;
-            max-width: 25%;
-        }
-
-        .container {
-            display: flex;
-            width: 100%;
-        }
-
-        li {
-            margin: 0.75rem;
-        }
-
-        .right-section {
-            margin-left: 1rem;
-            padding-left: 0.5rem;
-        }
-
-        .right-section h3 {
-            padding-top: 0;
-            font-weight: 200;
-        }
-
-        .right-section ul {
-            border-left: 0.3rem solid #00A1E2;
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-    </style>
+	<title>Contact V4</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
 
-<div class="banner lead">
-    Your new Cloud-Native application is ready!
-</div>
 
-<div class="container">
-    <div class="left-column">
-        <p class="lead"> Congratulations, you have created a new Quarkus application.</p>
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" action="/api/v1/" method="POST">
+				<span class="contact100-form-title">
+					URL Shortener
+				</span>
 
-        <h2>Why do you see this?</h2>
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<span class="label-input100">Original URL</span>
+					<input class="input100" type="text" name="url" placeholder="Enter long URL">
+					<span class="focus-input100"></span>
+				</div>
 
-        <p>This page is served by Quarkus. The source is in
-            <code>src/main/resources/META-INF/resources/index.html</code>.</p>
 
-        <h2>What can I do from here?</h2>
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn">
+							<span>
+								Shorten it!
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 
-        <p>If not already done, run the application in <em>dev mode</em> using: <code>mvn compile quarkus:dev</code>.
-        </p>
-        <ul>
-            <li>Add REST resources, Servlets, functions and other services in <code>src/main/java</code>.</li>
-            <li>Your static assets are located in <code>src/main/resources/META-INF/resources</code>.</li>
-            <li>Configure your application in <code>src/main/resources/application.properties</code>.
-            </li>
-        </ul>
 
-        <h2>How do I get rid of this page?</h2>
-        <p>Just delete the <code>src/main/resources/META-INF/resources/index.html</code> file.</p>
-    </div>
-    <div class="right-column">
-        <div class="right-section">
-            <h3>Application</h3>
-            <ul>
-                <li>GroupId: com.gustavolessa.urlshortener.controllers</li>
-                <li>ArtifactId: url-shortener</li>
-                <li>Version: 1.0.0-SNAPSHOT</li>
-                <li>Quarkus Version: 1.1.1.Final</li>
-            </ul>
-        </div>
-        <div class="right-section">
-            <h3>Next steps</h3>
-            <ul>
-                <li><a href="https://quarkus.io/guides/maven-tooling.html" target="_blank">Setup your IDE</a></li>
-                <li><a href="https://quarkus.io/guides/getting-started.html" target="_blank">Getting started</a></li>
-                <li><a href="https://quarkus.io" target="_blank">Quarkus Web Site</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
 
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
 
 </body>
 </html>
